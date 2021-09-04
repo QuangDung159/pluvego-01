@@ -37,6 +37,7 @@ export default function Main() {
               path="/profil"
               component={Profil}
             ></ProtectedRoute>
+            <ProtectedRoute exact path="/" component={Auth}></ProtectedRoute>
           </div>
         </div>
       </div>
