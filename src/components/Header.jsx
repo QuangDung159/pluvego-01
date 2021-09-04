@@ -1,12 +1,21 @@
 import React from "react"
+import { useDispatch } from "react-redux"
+import { Link } from "react-router-dom"
+import { setGlobalUserAuthorized } from "../redux/Actions"
 
 export default function Header() {
+  // redux
+  const dispatch = useDispatch()
+
+  // render
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+    <nav className="navbar navbar-expand-lg navbar-light border-bottom fixed-top bg-white">
       <div className="container-fluid">
-        <button className="btn btn-primary" id="sidebarToggle">
-          Toggle Menu
-        </button>
+        <img
+          src={process.env.PUBLIC_URL + "/assets/dist/images/logo.png"}
+          alt="logo"
+          className="img-fluid nav-bar-logo"
+        />
         <button
           className="navbar-toggler"
           type="button"
@@ -21,42 +30,22 @@ export default function Header() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
             <li className="nav-item active">
-              <a className="nav-link" href="#!">
-                Home
-              </a>
+              <Link className="nav-link" to="/profil">
+                Martin D.
+              </Link>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#!">
-                Link
-              </a>
-            </li>
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                id="navbarDropdown"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
+            <li className="nav-item active">
+              <Link
+                className="nav-link"
+                to="/auth"
+                onClick={() => {
+                  dispatch(setGlobalUserAuthorized(false))
+                  localStorage.removeItem("isAuthenticated")
+                  window.location.assign("/auth")
+                }}
               >
-                Dropdown
-              </a>
-              <div
-                className="dropdown-menu dropdown-menu-end"
-                aria-labelledby="navbarDropdown"
-              >
-                <a className="dropdown-item" href="#!">
-                  Action
-                </a>
-                <a className="dropdown-item" href="#!">
-                  Another action
-                </a>
-                <div className="dropdown-divider" />
-                <a className="dropdown-item" href="#!">
-                  Something else here
-                </a>
-              </div>
+                Se déconnecter
+              </Link>
             </li>
           </ul>
         </div>

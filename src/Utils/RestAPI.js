@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const baseUrl = "https://pick-me-api-v1.herokuapp.com/api/v1"
+const baseUrl = ""
 
 export const get = async (url, headers = {}) => {
   const response = await axios.get(`${baseUrl}${url}`, headers)

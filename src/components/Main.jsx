@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { Route } from "react-router"
-import Dashboard from "../views/Dashboard"
-import Home from "../views/Home"
-import Login from "../views/Login"
+import Auth from "../views/Auth"
+import Profil from "../views/Profil"
 import Header from "./Header"
 import ProtectedRoute from "./ProtectedRoute"
 import Sidebar from "./Sidebar"
@@ -27,16 +26,19 @@ export default function Main() {
   // render
   return (
     <div className="d-flex" id="wrapper">
-      {isShow && <Sidebar></Sidebar>}
       <div id="page-content-wrapper">
+        <Route exact path="/auth" component={Auth}></Route>
         {isShow && <Header></Header>}
-        <ProtectedRoute
-          exact
-          path="/dashboard"
-          component={Dashboard}
-        ></ProtectedRoute>
-        <ProtectedRoute exact path="/" component={Home}></ProtectedRoute>
-        <Route exact path="/login" component={Login}></Route>
+        <div className="padding-navbar">
+          {isShow && <Sidebar></Sidebar>}
+          <div className="content">
+            <ProtectedRoute
+              exact
+              path="/profil"
+              component={Profil}
+            ></ProtectedRoute>
+          </div>
+        </div>
       </div>
     </div>
   )
