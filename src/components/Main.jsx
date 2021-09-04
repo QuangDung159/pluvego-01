@@ -28,6 +28,7 @@ export default function Main() {
     <div className="d-flex" id="wrapper">
       <div id="page-content-wrapper">
         <Route exact path="/auth" component={Auth}></Route>
+        <Route exact path="/" component={Auth}></Route>
         {isShow && <Header></Header>}
         <div className="padding-navbar">
           {isShow && <Sidebar></Sidebar>}
@@ -37,7 +38,6 @@ export default function Main() {
               path="/profil"
               component={Profil}
             ></ProtectedRoute>
-            <ProtectedRoute exact path="/" component={Auth}></ProtectedRoute>
           </div>
         </div>
       </div>

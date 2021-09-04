@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup"
-import React from "react"
+import React, { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { useDispatch } from "react-redux"
 import { useHistory } from "react-router-dom"
@@ -26,6 +26,14 @@ export default function Auth() {
   const history = useHistory()
 
   // function
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem("isAuthenticated")
+    if (isAuthenticated) {
+      dispatch(setGlobalUserAuthorized(true))
+      history.push("/profil")
+    }
+  }, [])
+
   const onLoginSubmit = data => {
     const { email, password } = data
     if (email === "quangdunglu159@gmail.com" && password === "1") {
