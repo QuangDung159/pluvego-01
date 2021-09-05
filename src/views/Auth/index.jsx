@@ -4,7 +4,12 @@ import { useForm } from "react-hook-form"
 import { useDispatch } from "react-redux"
 import { useHistory } from "react-router-dom"
 import * as yup from "yup"
-import { setGlobalUserAuthorized } from "../../redux/Actions"
+import {
+  setGlobalShowLoader,
+  setGlobalShowToast,
+  setGlobalUserAuthorized
+} from "../../redux/Actions"
+import { loginAsync } from "../../Utils/ApiManager"
 
 // create validation schema
 const schema = yup.object().shape({
@@ -27,19 +32,29 @@ export default function Auth() {
 
   // function
   useEffect(() => {
-    const isAuthenticated = localStorage.getItem("isAuthenticated")
-    if (isAuthenticated) {
+    const token = localStorage.getItem("token")
+    if (!!token) {
       dispatch(setGlobalUserAuthorized(true))
       history.push("/profil")
     }
   }, [])
 
-  const onLoginSubmit = data => {
-    const { email, password } = data
-    if (email === "quangdunglu159@gmail.com" && password === "1") {
-      dispatch(setGlobalUserAuthorized(true))
+  const onLoginSubmit = async data => {
+    data.email = data.email.replace("@admin.com", "")
+    dispatch(setGlobalShowLoader(true))
+    const res = await loginAsync({
+      username: data.email,
+      password: data.password
+    })
+
+    if (res.status === 200) {
+      localStorage.setItem("token", res.data.token)
       history.push("/profil")
+
+      dispatch(setGlobalUserAuthorized(true))
+      dispatch(setGlobalShowToast(true, res.message, "success"))
     }
+    dispatch(setGlobalShowLoader(false))
   }
 
   //render
@@ -57,6 +72,7 @@ export default function Auth() {
                 Adresse email
               </label>
               <input
+                defaultValue="admin@admin.com"
                 type="email"
                 className={`form-control form-control-sm form-control-lg ${
                   errors.email && "is-invalid"
@@ -79,6 +95,7 @@ export default function Auth() {
                 }`}
                 id="pwd"
                 {...register("password")}
+                defaultValue="0000"
               />
               {errors.password && (
                 <p className="invalid-feedback">{errors.password?.message}</p>

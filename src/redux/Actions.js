@@ -1,6 +1,8 @@
 import {
   RESET_GLOBAL_STORE_SIGN_OUT,
   SET_GLOBAL_CURRENT_USER,
+  SET_GLOBAL_IS_SMALL_SCREEN,
+  SET_GLOBAL_OPEN_SIDENAV,
   SET_GLOBAL_SHOW_LOADER,
   SET_GLOBAL_SHOW_TOAST,
   SET_GLOBAL_USER_AUTHORIZED
@@ -25,7 +27,7 @@ export const setGlobalShowToast = (
   type: SET_GLOBAL_SHOW_TOAST,
   payload: {
     globalShowToast,
-    toastProps: { type, content }
+    globalToastProps: { type, content }
   }
 })
 
@@ -40,5 +42,19 @@ export const setGlobalUserAuthorized = globalUserAuthorized => ({
   type: SET_GLOBAL_USER_AUTHORIZED,
   payload: {
     globalUserAuthorized
+  }
+})
+
+export const setGlobalOpenSidenav = globalOpenSidenav => ({
+  type: SET_GLOBAL_OPEN_SIDENAV,
+  payload: {
+    globalOpenSidenav
+  }
+})
+
+export const setGlobalIsSmallScreen = globalIsSmallScreen => ({
+  type: SET_GLOBAL_IS_SMALL_SCREEN,
+  payload: {
+    globalIsSmallScreen
   }
 })

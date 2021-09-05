@@ -1,9 +1,7 @@
-const { createStore } = require("redux")
+import logger from "redux-logger"
+const { createStore, applyMiddleware } = require("redux")
 const { default: Root } = require("./reducers/Root")
 
-const store = createStore(Root)
-store.subscribe(() => {
-  // console.log("STORE UPDATED: ", store.getState())
-})
+const store = createStore(Root, applyMiddleware(logger))
 
 export default store
