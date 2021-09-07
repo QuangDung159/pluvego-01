@@ -13,7 +13,10 @@ import { loginAsync } from "../../Utils/ApiManager"
 
 // create validation schema
 const schema = yup.object().shape({
-  email: yup.string().required("Veuillez entrer votre email"),
+  email: yup
+    .string()
+    .required("Veuillez entrer votre email")
+    .email("Email invalide"),
   password: yup.string().required("Veuillez entrer un mot de passe")
 })
 
@@ -35,7 +38,7 @@ export default function Auth() {
     const token = localStorage.getItem("token")
     if (!!token) {
       dispatch(setGlobalUserAuthorized(true))
-      history.push("/profil")
+      history.push("/admin/profil")
     }
   }, [])
 
@@ -49,7 +52,7 @@ export default function Auth() {
 
     if (res.status === 200) {
       localStorage.setItem("token", res.data.token)
-      history.push("/profil")
+      history.push("/admin/profil")
 
       dispatch(setGlobalUserAuthorized(true))
       dispatch(setGlobalShowToast(true, res.message, "success"))
@@ -59,56 +62,64 @@ export default function Auth() {
 
   //render
   return (
-    <div className="container-fluid">
-      <div className="min-vh-100 d-flex align-items-center justify-content-center">
-        {/* main section */}
-        <div className="border mx-sm-3">
-          <form className="auth-form" onSubmit={handleSubmit(onLoginSubmit)}>
-            <div className="form-group">
-              <label
-                htmlFor="email"
-                className="w-100 text-center mb-2 fw-bolder"
-              >
-                Adresse email
-              </label>
-              <input
-                defaultValue="admin@admin.com"
-                type="email"
-                className={`form-control form-control-sm form-control-lg ${
-                  errors.email && "is-invalid"
-                }`}
-                id="email"
-                {...register("email")}
-              />
-              {errors.email && (
-                <p className="invalid-feedback">{errors.email?.message}</p>
-              )}
-            </div>
-            <div className="form-group">
-              <label htmlFor="pwd" className="w-100 text-center mb-2 fw-bolder">
-                Mot de passe
-              </label>
-              <input
-                type="password"
-                className={`form-control form-control-sm form-control-lg ${
-                  errors.password && "is-invalid"
-                }`}
-                id="pwd"
-                {...register("password")}
-                defaultValue="0000"
-              />
-              {errors.password && (
-                <p className="invalid-feedback">{errors.password?.message}</p>
-              )}
-            </div>
-            <div className="w-100 d-flex justify-content-center">
-              <button type="submit" className="btn shadow bg-white">
-                Se connecter
-              </button>
-            </div>
-          </form>
+    <div className="center-wrapper-fullscreen">
+      <form
+        className="bg-white text-center rounded px-8 pt-6 p-0 pb-8 mb-4 border lg:w-1/4"
+        onSubmit={handleSubmit(onLoginSubmit)}
+      >
+        <div className="mb-4">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="email"
+          >
+            Adresse email
+          </label>
+          <input
+            className={`${
+              errors?.email && "border-red-500"
+            } appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+            name="email"
+            type="text"
+            {...register("email")}
+            defaultValue="admin@admin.com"
+          />
+          {errors?.email && (
+            <p className="text-red-500 text-xs italic">
+              {errors.email.message}
+            </p>
+          )}
         </div>
-      </div>
+        <div className="mb-6">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="password"
+          >
+            Mot de passe
+          </label>
+          <input
+            className={`${
+              errors?.password && "border-red-500"
+            } appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+            nam="password"
+            type="password"
+            {...register("password")}
+            defaultValue="0000"
+          />
+          {errors?.password && (
+            <p className="text-red-500 text-xs italic">
+              {errors.password.message}
+            </p>
+          )}
+        </div>
+        <div className="justify-between">
+          <button
+            className="shadow-2xl text-gray-700 bg-gray-300 hover:bg-gray-400 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+          >
+            Se connecter
+          </button>
+        </div>
+      </form>
     </div>
   )
 }

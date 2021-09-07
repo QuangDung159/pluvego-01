@@ -1,68 +1,43 @@
 import React from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
-import { setGlobalOpenSidenav, setGlobalUserAuthorized } from "../redux/Actions"
+import { NavLink } from "react-router-dom"
+import LogoSgv from "../components/LogoSgv"
 
-export default function Header({ isShowInfo }) {
+export default function Header() {
   // redux
-  const dispatch = useDispatch()
-  const globalIsSmallScreen = useSelector(
-    state => state.app.globalIsSmallScreen
-  )
+
+  // variable
 
   // function
-
-  // render
-  const renderMenuButton = () => {
-    return (
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-        onClick={() => dispatch(setGlobalOpenSidenav(true))}
-      >
-        <span className="navbar-toggler-icon" />
-      </button>
-    )
+  const handleLogout = () => {
+    localStorage.removeItem("token")
   }
 
+  // render
   return (
-    <nav className="navbar navbar-expand-lg navbar-light border-bottom fixed-top bg-white">
-      <div className="container-fluid">
-        {isShowInfo && globalIsSmallScreen && renderMenuButton()}
-        <img
-          src={process.env.PUBLIC_URL + "/assets/dist/images/logo.png"}
-          alt="logo"
-          className="img-fluid nav-bar-logo"
-        />
-
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          {isShowInfo && (
-            <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
-              <li className="nav-item active">
-                <Link className="nav-link" to="/profil">
-                  Martin D.
-                </Link>
-              </li>
-              <li className="nav-item active">
-                <Link
-                  className="nav-link"
-                  to="/auth"
-                  onClick={() => {
-                    dispatch(setGlobalUserAuthorized(false))
-                    localStorage.removeItem("token")
-                    window.location.assign("/auth")
-                  }}
-                >
-                  Se déconnecter
-                </Link>
-              </li>
-            </ul>
-          )}
-        </div>
-      </div>
-    </nav>
+    <div className="hidden flex-1 flex flex-col md:block">
+      <nav className="px-4 flex justify-between bg-gray-100 h-16">
+        {/* top bar left */}
+        <ul className="flex items-center">
+          {/* add button */}
+          <li className="h-auto w-56">
+            {/* <img
+              className="h-full w-full mx-auto"
+              src={process.env.PUBLIC_URL + "/assets/dist/images/logo.png"}
+              alt="svelte logo"
+            /> */}
+            <LogoSgv></LogoSgv>
+          </li>
+        </ul>
+        {/* to bar right  */}
+        <ul className="flex items-center text-gray-700">
+          <li className="pr-6">John Doe</li>
+          <li className="pr-6">
+            <NavLink exact to="/" onClick={() => handleLogout()}>
+              Se déconnecter
+            </NavLink>
+          </li>
+        </ul>
+      </nav>
+    </div>
   )
 }

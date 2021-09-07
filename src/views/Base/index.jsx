@@ -68,7 +68,7 @@ export default function Base() {
             </div>
             <div className="form-group row">
               <div className="col-sm-5">
-                <button type="submit" className="btn">
+                <button type="submit" className="btn btn-shadow">
                   Submit
                 </button>
               </div>
@@ -134,12 +134,74 @@ export default function Base() {
           >
             Toast Dark
           </button>
+        </div>
 
-          <h4 className="d-flex justify-content-center py-xxl-3">
-            Badge Button
-          </h4>
+        <h4 className="d-flex justify-content-center py-xxl-3">
+          Button Shadow
+        </h4>
+        <div>
+          <button
+            onClick={() => onClickBtn("primary", "Toast primary")}
+            type="button"
+            className="btn btn-primary mb-3 w-25 btn-shadow"
+          >
+            Toast Primary
+          </button>
+          <button
+            onClick={() => onClickBtn("secondary", "Toast secondary")}
+            type="button"
+            className="btn btn-secondary mb-3 w-25 btn-shadow"
+          >
+            Toast Secondary
+          </button>
+          <button
+            onClick={() => onClickBtn("success", "Toast success")}
+            type="button"
+            className="btn btn-success mb-3 w-25 btn-shadow"
+          >
+            Toast Success
+          </button>
+          <button
+            onClick={() => onClickBtn("danger", "Toast danger")}
+            type="button"
+            className="btn btn-danger mb-3 w-25 btn-shadow"
+          >
+            Toast Danger
+          </button>
+          <button
+            onClick={() => onClickBtn("warning", "Toast warning")}
+            type="button"
+            className="btn btn-warning mb-3 w-25 btn-shadow"
+          >
+            Toast Warning
+          </button>
+          <button
+            onClick={() => onClickBtn("info", "Toast info")}
+            type="button"
+            className="btn btn-info mb-3 w-25 btn-shadow"
+          >
+            Toast Info
+          </button>
+          <button
+            onClick={() => onClickBtn("light", "Toast light")}
+            type="button"
+            className="btn btn-light mb-3 w-25 btn-shadow"
+          >
+            Toast Light
+          </button>
+          <button
+            onClick={() => onClickBtn("dark", "Toast Dark")}
+            type="button"
+            className="btn btn-dark mb-3 w-25 btn-shadow"
+          >
+            Toast Dark
+          </button>
+        </div>
+
+        <h4 className="d-flex justify-content-center py-xxl-3">Badge Button</h4>
+        <div>
           <div className="mb-3">
-            <span className="badge badge-pill badge-primary">Secondary</span>
+            <span className="badge badge-pill badge-primary">Primary</span>
             <span className="badge badge-pill badge-secondary">Secondary</span>
             <span className="badge badge-pill badge-success">Success</span>
             <span className="badge badge-pill badge-danger">Danger</span>
@@ -148,29 +210,128 @@ export default function Base() {
             <span className="badge badge-pill badge-light">Light</span>
             <span className="badge badge-pill badge-dark">Dark</span>
           </div>
-
+        </div>
+        <h4 className="d-flex justify-content-center py-xxl-3">
+          Badge Button Shadow
+        </h4>
+        <div>
           <div className="mb-3">
-            <span className="badge badge-primary">Secondary</span>
-            <span className="badge badge-secondary">Secondary</span>
-            <span className="badge badge-success">Success</span>
-            <span className="badge badge-danger">Danger</span>
-            <span className="badge badge-warning">Warning</span>
-            <span className="badge badge-info">Info</span>
-            <span className="badge badge-light">Light</span>
-            <span className="badge badge-dark">Dark</span>
-          </div>
-          <div className="mb-3">
-            <button type="button" className="btn btn-primary">
-              Messages <span className="badge badge-light">4</span>
-            </button>
-            <button type="button" className="btn btn-danger">
-              Notifications <span className="badge badge-light">7</span>
-            </button>
+            <span className="badge badge-pill badge-primary btn-shadow">
+              Primary
+            </span>
+            <span className="badge badge-pill badge-secondary btn-shadow">
+              Secondary
+            </span>
+            <span className="badge badge-pill badge-success btn-shadow">
+              Success
+            </span>
+            <span className="badge badge-pill badge-danger btn-shadow">
+              Danger
+            </span>
+            <span className="badge badge-pill badge-warning btn-shadow">
+              Warning
+            </span>
+            <span className="badge badge-pill badge-info btn-shadow">Info</span>
+            <span className="badge badge-pill badge-light btn-shadow">
+              Light
+            </span>
+            <span className="badge badge-pill badge-dark btn-shadow">Dark</span>
           </div>
         </div>
 
-        <div className="col-sm-3 col-lg-3"></div>
+        <h4 className="d-flex justify-content-center py-xxl-3">Color</h4>
+        <span
+          style={{
+            width: 200,
+            height: 200,
+            backgroundColor: "#0a6342",
+            textAlign: "center",
+            marginLeft: "1rem",
+            marginBottom: "1rem"
+          }}
+        >
+          <p
+            style={{
+              fontSize: 18,
+              fontWeight: "bold",
+              color: "white",
+              justifyContent: "center",
+              marginTop: 70
+            }}
+          >
+            Menu active #0a6342
+          </p>
+        </span>
+
+        <span
+          style={{
+            width: 200,
+            height: 200,
+            backgroundColor: "#555",
+            textAlign: "center",
+            marginLeft: "1rem",
+            marginBottom: "1rem"
+          }}
+        >
+          <p
+            style={{
+              fontSize: 18,
+              fontWeight: "bold",
+              color: "white",
+              justifyContent: "center",
+              marginTop: 70
+            }}
+          >
+            Menu hover #555
+          </p>
+        </span>
+
+        <span
+          style={{
+            width: 200,
+            height: 200,
+            backgroundColor: "#dc3545",
+            textAlign: "center",
+            marginLeft: "1rem",
+            marginBottom: "1rem"
+          }}
+        >
+          <p
+            style={{
+              fontSize: 18,
+              fontWeight: "bold",
+              color: "white",
+              justifyContent: "center",
+              marginTop: 70
+            }}
+          >
+            Validation error #dc3545
+          </p>
+        </span>
+        <span
+          style={{
+            width: 200,
+            height: 200,
+            backgroundColor: "#f3f3f3",
+            textAlign: "center",
+            marginLeft: "1rem",
+            marginBottom: "1rem"
+          }}
+        >
+          <p
+            style={{
+              fontSize: 18,
+              fontWeight: "bold",
+              color: "black",
+              justifyContent: "center",
+              marginTop: 70
+            }}
+          >
+            Slide menu background #f3f3f3
+          </p>
+        </span>
       </div>
+      <div className="col-sm-3 col-lg-3"></div>
     </div>
   )
 }
