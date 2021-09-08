@@ -42,11 +42,11 @@ export default function Profil() {
   } = useForm({ resolver: yupResolver(schema) })
 
   const [formData, setFormData] = useState({
-    nom: "",
-    prenom: "",
-    fonction: "",
-    email: "",
-    phoneNum: ""
+    nom: "nom",
+    prenom: "prenom",
+    fonction: "fonction",
+    email: "admin@admin.com",
+    phoneNum: "3322312312"
   })
 
   const [isPhoneValid, setIsPhoneValid] = useState(true)
@@ -83,7 +83,7 @@ export default function Profil() {
         onSubmit={handleSubmit(onSubmit)}
       >
         <InlineInput
-          type="password"
+          type="text"
           register={register}
           inputName="nom"
           label="Nom"
@@ -91,6 +91,7 @@ export default function Profil() {
           onChange={e => {
             handleInputChange(e)
           }}
+          value={formData.nom || ""}
         ></InlineInput>
         <InlineInput
           type="text"
@@ -101,6 +102,7 @@ export default function Profil() {
           onChange={e => {
             handleInputChange(e)
           }}
+          value={formData.prenom || ""}
         ></InlineInput>
         <InlineInput
           type="text"
@@ -111,6 +113,7 @@ export default function Profil() {
           onChange={e => {
             handleInputChange(e)
           }}
+          value={formData.fonction || ""}
         ></InlineInput>
         <InlineInput
           type="text"
@@ -121,6 +124,7 @@ export default function Profil() {
           onChange={e => {
             handleInputChange(e)
           }}
+          value={formData.email || ""}
         ></InlineInput>
         <InlinePhoneInput
           country={"fr"}
