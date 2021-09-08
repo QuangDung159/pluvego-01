@@ -47,7 +47,7 @@ export default function Profil() {
     phoneNum: "123123123"
   })
 
-  const [isPhoneValid, setIsPhoneValid] = useState(false)
+  const [isPhoneValid, setIsPhoneValid] = useState(true)
 
   // function
   const onSubmit = () => {
