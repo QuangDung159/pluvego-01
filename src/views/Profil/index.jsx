@@ -1,10 +1,12 @@
 import { yupResolver } from "@hookform/resolvers/yup"
 import React, { useState } from "react"
 import { useForm } from "react-hook-form"
-import PhoneInput from "react-phone-input-2"
 import "react-phone-input-2/lib/style.css"
 import { useDispatch } from "react-redux"
 import * as yup from "yup"
+import Button from "../../components/BaseComponents/Button"
+import InlineInput from "../../components/BaseComponents/InlineInput"
+import InlinePhoneInput from "../../components/BaseComponents/InlinePhoneInput"
 import { setGlobalShowToast } from "../../redux/Actions"
 
 // create validation schema
@@ -33,7 +35,7 @@ export default function Profil() {
   const dispatch = useDispatch()
 
   // variable
-  let {
+  const {
     register,
     handleSubmit,
     formState: { errors }
@@ -44,7 +46,7 @@ export default function Profil() {
     prenom: "",
     fonction: "",
     email: "",
-    phoneNum: "123123123"
+    phoneNum: ""
   })
 
   const [isPhoneValid, setIsPhoneValid] = useState(true)
@@ -76,152 +78,70 @@ export default function Profil() {
 
   const renderForm = () => {
     return (
-      <form className="md:w-1/2" onSubmit={handleSubmit(onSubmit)}>
-        <div className="md:flex md:items-center mb-6">
-          <div className="md:w-2/5">
-            <label
-              className="block text-gray-500 font-bold mb-1 md:mb-0 pr-4"
-              htmlFor="name"
-            >
-              Nom
-            </label>
-          </div>
-          <div className="md:w-3/5">
-            <input
-              className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-              type="text"
-              name="name"
-              {...register("nom")}
-              defaultValue="nom"
-            />
-            {errors?.nom && (
-              <p className="text-red-500 text-xs italic">
-                {errors.nom.message}
-              </p>
-            )}
-          </div>
-        </div>
-        <div className="md:flex md:items-center mb-6">
-          <div className="md:w-2/5">
-            <label
-              className="block text-gray-500 font-bold mb-1 md:mb-0 pr-4"
-              htmlFor="preName"
-            >
-              Prénom
-            </label>
-          </div>
-          <div className="md:w-3/5">
-            <input
-              className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-              type="text"
-              name="preName"
-              {...register("prenom")}
-              defaultValue="prénom"
-            />
-            {errors?.prenom && (
-              <p className="text-red-500 text-xs italic">
-                {errors.prenom.message}
-              </p>
-            )}
-          </div>
-        </div>
-        <div className="md:flex md:items-center mb-6">
-          <div className="md:w-2/5">
-            <label
-              className="block text-gray-500 font-bold mb-1 md:mb-0 pr-4"
-              htmlFor="function"
-            >
-              Fonction
-            </label>
-          </div>
-          <div className="md:w-3/5">
-            <input
-              className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-              type="text"
-              name="function"
-              {...register("fonction")}
-              defaultValue="Fonction"
-            />
-            {errors?.fonction && (
-              <p className="text-red-500 text-xs italic">
-                {errors.fonction.message}
-              </p>
-            )}
-          </div>
-        </div>
-        <div className="md:flex md:items-center mb-6">
-          <div className="md:w-2/5">
-            <label
-              className="block text-gray-500 font-bold mb-1 md:mb-0 pr-4"
-              htmlFor="email"
-            >
-              Adresse email
-            </label>
-          </div>
-          <div className="md:w-3/5">
-            <input
-              className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-              type="text"
-              name="email"
-              {...register("email")}
-              defaultValue="admin@damin.com"
-            />
-            {errors?.email && (
-              <p className="text-red-500 text-xs italic">
-                {errors.email.message}
-              </p>
-            )}
-          </div>
-        </div>
-        <div className="md:flex md:items-center mb-6">
-          <div className="md:w-2/5">
-            <label
-              className="block text-gray-500 font-bold mb-1 md:mb-0 pr-4"
-              htmlFor="email"
-            >
-              Numéro de téléphone
-            </label>
-          </div>
-          <div className="md:w-3/5">
-            <PhoneInput
-              inputClass={`appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-              country={"fr"}
-              value={formData.phoneNum}
-              onChange={phone => {
-                setFormData({ ...formData, phoneNum: phone })
-                onValidatePhone(phone)
-              }}
-              inputStyle={{
-                width: "100%"
-              }}
-            />
-            {!isPhoneValid && (
-              <p className="text-red-500 text-xs italic">
-                Le numéro de téléphone n'est pas valide
-              </p>
-            )}
-          </div>
-        </div>
+      <form
+        className="lg:w-3/4 md:w-full xl:w-1/2"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <InlineInput
+          type="password"
+          register={register}
+          inputName="nom"
+          label="Nom"
+          validateMessage={errors?.nom?.message}
+          onChange={e => {
+            handleInputChange(e)
+          }}
+        ></InlineInput>
+        <InlineInput
+          type="text"
+          register={register}
+          inputName="prenom"
+          label="Prénom"
+          validateMessage={errors?.prenom?.message}
+          onChange={e => {
+            handleInputChange(e)
+          }}
+        ></InlineInput>
+        <InlineInput
+          type="text"
+          register={register}
+          inputName="fonction"
+          label="Fonction"
+          validateMessage={errors?.fonction?.message}
+          onChange={e => {
+            handleInputChange(e)
+          }}
+        ></InlineInput>
+        <InlineInput
+          type="text"
+          register={register}
+          inputName="email"
+          label="Adresse email"
+          validateMessage={errors?.email?.message}
+          onChange={e => {
+            handleInputChange(e)
+          }}
+        ></InlineInput>
+        <InlinePhoneInput
+          country={"fr"}
+          value={formData.phoneNum}
+          onChange={phone => {
+            setFormData({ ...formData, phoneNum: phone })
+            onValidatePhone(phone)
+          }}
+          validateMessage={
+            !isPhoneValid && "Le numéro de téléphone n'est pas valide"
+          }
+          label="Numéro de téléphone"
+        ></InlinePhoneInput>
 
-        <div className="justify-between">
-          <button
-            className="shadow-2xl text-gray-700 bg-gray-300 hover:bg-gray-400 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Se connecter
-          </button>
-        </div>
+        <Button buttonClass="btn-primary" label="Submit"></Button>
       </form>
     )
   }
 
   return (
-    <div
-      class="md:flex md:items-center mb-6"
-      style={{
-        flexDirection: "column"
-      }}
-    >
+    <div className="md:flex md:items-center mb-6 flex-col">
       <p className="text-2xl pb-5">Profil</p>
       {renderForm()}
     </div>

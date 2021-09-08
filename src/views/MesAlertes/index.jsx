@@ -9,8 +9,8 @@ export default function MesAlertes() {
 
   // render
   return (
-    <div className="container-fluid">
-      <h2 className="d-flex justify-content-center py-xxl-3">Mes alertes</h2>
+    <div className="md:flex md:items-center mb-6flex-col">
+      <p className="text-2xl pb-5">Mes alertes</p>
     </div>
   )
 }

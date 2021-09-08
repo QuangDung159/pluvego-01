@@ -9,8 +9,8 @@ export default function MesContacts() {
 
   // render
   return (
-    <div className="container-fluid">
-      <h2 className="d-flex justify-content-center py-xxl-3">Mes contacts</h2>
+    <div className="md:flex md:items-center mb-6 flex-col">
+      <p className="text-2xl pb-5">Mes contacts</p>
     </div>
   )
 }

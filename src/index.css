@@ -8,6 +8,46 @@
   }
 }
 
+.btn-disable {
+  @apply bg-gray-400
+}
+
 .center-wrapper-fullscreen {
   @apply h-screen flex flex-wrap content-center justify-center
+}
+
+.btn-primary {
+  @apply shadow-2xl text-gray-700 bg-green-400 font-bold py-2 px-4 rounded
+}
+
+.btn-primary:hover {
+  @apply btn-disable
+}
+
+.btn-default {
+  @apply shadow-2xl text-gray-700 bg-gray-200 font-bold py-2 px-4 rounded
+}
+
+.btn-default:hover {
+  @apply btn-disable
+}
+
+.validate-error-text {
+  @apply text-red-500 text-xs italic
+}
+
+.inline-input {
+  @apply appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight
+}
+
+.inline-input-label {
+  @apply block text-gray-500 font-bold mb-1 md:mb-0 pr-4
+}
+
+.inline-input-container {
+  @apply md:flex md:items-center mb-6
+}
+
+.phone-inline-input-container {
+  @apply appearance-none border rounded py-2 px-3 text-gray-700 leading-tight
 }
