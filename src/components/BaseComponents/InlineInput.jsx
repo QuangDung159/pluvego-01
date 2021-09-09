@@ -27,7 +27,7 @@ export default function InlineInput({ ...props }) {
       {label && (
         <div className="md:w-2/5">
           <label
-            className={`inline-input-label ${labelTextClass}`}
+            className={`input-label ${labelTextClass}`}
             style={labelTextStyle}
           >
             {label}
@@ -40,12 +40,14 @@ export default function InlineInput({ ...props }) {
           <>
             <input
               type={type}
-              className={`inline-input ${inputClass}`}
+              className={`inline-input ${inputClass} ${
+                validateMessage && "input-border-red"
+              }`}
               style={inputStyle}
               {...register(inputName.toString())}
               defaultValue={defaultValue}
               onChange={input => onChange(input)}
-              value={value}
+              value={value || ""}
             />
             {validateMessage && (
               <p className={`validate-error-text ${validateMessageClass}`}>

@@ -1,4 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup"
+import Input from "../../components/BaseComponents/Input"
 import React, { useState } from "react"
 import { useForm } from "react-hook-form"
 import * as yup from "yup"
@@ -29,11 +30,7 @@ export default function Base() {
     formState: { errors }
   } = useForm({ resolver: yupResolver(schema) })
 
-  const [formData, setFormData] = useState({
-    email: "",
-    phoneNum: "",
-    prenom: ""
-  })
+  const [formData, setFormData] = useState({})
 
   const [isPhoneValid, setIsPhoneValid] = useState(true)
 
@@ -55,10 +52,10 @@ export default function Base() {
 
   // render
   return (
-    <div className="md:flex md:items-center mb-6 flex-col">
-      <p className="text-2xl pb-5">Base</p>
+    <div className="md:flex md:items-center flex-col">
+      <p className="text-bold text-2xl">Base</p>
       <div className="mb-6 w-1/2 px-3">
-        <p className="text-xl pb-6">Inline input</p>
+        <p className="text-bold text-xl pb-6">Inline input</p>
         <InlineInput
           type="text"
           register={register}
@@ -81,12 +78,13 @@ export default function Base() {
           }}
         ></InlineInput>
         <InlinePhoneInput
-          country={"fr"}
+          country="fr"
           value={formData.phoneNum}
           onChange={phone => {
             setFormData({ ...formData, phoneNum: phone })
             onValidatePhone(phone)
           }}
+          inputName="phoneNum"
           validateMessage={
             !isPhoneValid && "Le numéro de téléphone n'est pas valide"
           }
@@ -94,8 +92,36 @@ export default function Base() {
         ></InlinePhoneInput>
       </div>
 
+      <div className="mb-6 w-1/2 px-3">
+        <p className="text-bold text-xl pb-6">Input</p>
+        <Input
+          label="Name"
+          register={register}
+          inputName="name"
+          validateMessage={errors?.name?.message}
+          onChange={e => handleInputChange(e)}
+          value={formData.name}
+        ></Input>
+        <Input
+          label="Password"
+          register={register}
+          inputName="password"
+          type="password"
+          validateMessage={errors?.password?.message}
+          onChange={e => handleInputChange(e)}
+          value={formData.password}
+        ></Input>
+        <Input
+          label="Invalid field"
+          register={register}
+          validateMessage="Invalid field"
+          onChange={e => handleInputChange(e)}
+          value={formData.email}
+        ></Input>
+      </div>
+
       <div className="mb-6 w-1/2 px-3 flex-row">
-        <p className="text-xl pb-6">Button</p>
+        <p className="text-bold text-xl pb-6">Button</p>
         <div className="flex">
           <Button buttonClass="btn-primary mr-3" label="Submit"></Button>
           <Button buttonClass="btn-default" label="Cancel"></Button>
@@ -103,7 +129,7 @@ export default function Base() {
       </div>
 
       <div className="mb-6 w-1/2 px-3 flex-row">
-        <p className="text-xl pb-6">Color</p>
+        <p className="text-bold text-xl pb-6">Color</p>
         <div className="flex">
           <div
             className="bg-green-400 mr-3"

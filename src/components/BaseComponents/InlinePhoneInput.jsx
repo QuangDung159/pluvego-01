@@ -15,7 +15,8 @@ export default function InlinePhoneInput({ ...props }) {
     inputClass,
     validateMessage,
     validateMessageClass,
-    label
+    label,
+    country = "fr"
   } = props
 
   return (
@@ -26,7 +27,7 @@ export default function InlinePhoneInput({ ...props }) {
       {label && (
         <div className="md:w-2/5">
           <label
-            className={`inline-input-label ${labelTextClass}`}
+            className={`input-label ${labelTextClass}`}
             style={labelTextStyle}
             htmlFor="phone"
           >
@@ -37,9 +38,11 @@ export default function InlinePhoneInput({ ...props }) {
 
       <div className={`${label && "md:w-3/5"}`}>
         <PhoneInput
-          inputclassName={`phone-inline-input-container ${inputClass}`}
-          country={"fr"}
-          value={value}
+          inputClass={`phone-inline-input-container input-border-red ${inputClass} ${
+            validateMessage && "input-border-red"
+          }`}
+          country={country}
+          value={value || ""}
           onChange={phone => {
             onChange(phone)
           }}

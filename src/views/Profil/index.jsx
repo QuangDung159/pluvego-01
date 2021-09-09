@@ -91,7 +91,7 @@ export default function Profil() {
           onChange={e => {
             handleInputChange(e)
           }}
-          value={formData.nom || ""}
+          value={formData.nom}
         ></InlineInput>
         <InlineInput
           type="text"
@@ -102,7 +102,7 @@ export default function Profil() {
           onChange={e => {
             handleInputChange(e)
           }}
-          value={formData.prenom || ""}
+          value={formData.prenom}
         ></InlineInput>
         <InlineInput
           type="text"
@@ -113,7 +113,7 @@ export default function Profil() {
           onChange={e => {
             handleInputChange(e)
           }}
-          value={formData.fonction || ""}
+          value={formData.fonction}
         ></InlineInput>
         <InlineInput
           type="text"
@@ -124,10 +124,10 @@ export default function Profil() {
           onChange={e => {
             handleInputChange(e)
           }}
-          value={formData.email || ""}
+          value={formData.email}
         ></InlineInput>
         <InlinePhoneInput
-          country={"fr"}
+          country="fr"
           value={formData.phoneNum}
           onChange={phone => {
             setFormData({ ...formData, phoneNum: phone })

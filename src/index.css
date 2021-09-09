@@ -40,7 +40,7 @@
   @apply appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight
 }
 
-.inline-input-label {
+.input-label {
   @apply block text-gray-500 font-bold mb-1 md:mb-0 pr-4
 }
 
@@ -50,4 +50,20 @@
 
 .phone-inline-input-container {
   @apply appearance-none border rounded py-2 px-3 text-gray-700 leading-tight
+}
+
+.input {
+  @apply appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight
+}
+
+.input-border-red {
+  @apply border-red-500
+}
+
+.text-bold {
+  @apply text-regular font-bold
+}
+
+.text-regular {
+  @apply text-gray-500
 }

@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup"
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { useDispatch } from "react-redux"
 import { useHistory } from "react-router-dom"
@@ -10,6 +10,8 @@ import {
   setGlobalUserAuthorized
 } from "../../redux/Actions"
 import { loginAsync } from "../../Utils/ApiManager"
+import Button from "../../components/BaseComponents/Button"
+import Input from "../../components/BaseComponents/Input"
 
 // create validation schema
 const schema = yup.object().shape({
@@ -33,6 +35,11 @@ export default function Auth() {
 
   const history = useHistory()
 
+  const [formData, setFormData] = useState({
+    email: "admin@admin.com",
+    password: "0000"
+  })
+
   // function
   useEffect(() => {
     const token = localStorage.getItem("token")
@@ -42,13 +49,16 @@ export default function Auth() {
     }
   }, [])
 
-  const onLoginSubmit = async data => {
-    data.email = data.email.replace("@admin.com", "")
+  const onLoginSubmit = async () => {
+    const { email, password } = formData
+
+    const body = {
+      username: email.replace("@admin.com", ""),
+      password
+    }
+
     dispatch(setGlobalShowLoader(true))
-    const res = await loginAsync({
-      username: data.email,
-      password: data.password
-    })
+    const res = await loginAsync(body)
 
     if (res.status === 200) {
       localStorage.setItem("token", res.data.token)
@@ -60,6 +70,13 @@ export default function Auth() {
     dispatch(setGlobalShowLoader(false))
   }
 
+  const handleInputChange = e => {
+    const target = e.target
+    const value = target.type === "checkbox" ? target.checked : target.value
+    const name = target.name
+    setFormData({ ...formData, [name]: value })
+  }
+
   //render
   return (
     <div className="center-wrapper-fullscreen">
@@ -67,58 +84,24 @@ export default function Auth() {
         className="bg-white text-center rounded px-8 pt-6 p-0 pb-8 mb-4 border lg:w-1/4"
         onSubmit={handleSubmit(onLoginSubmit)}
       >
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="email"
-          >
-            Adresse email
-          </label>
-          <input
-            className={`${
-              errors?.email && "border-red-500"
-            } appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-            name="email"
-            type="text"
-            {...register("email")}
-            defaultValue="admin@admin.com"
-          />
-          {errors?.email && (
-            <p className="text-red-500 text-xs italic">
-              {errors.email.message}
-            </p>
-          )}
-        </div>
-        <div className="mb-6">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="password"
-          >
-            Mot de passe
-          </label>
-          <input
-            className={`${
-              errors?.password && "border-red-500"
-            } appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-            nam="password"
-            type="password"
-            {...register("password")}
-            defaultValue="0000"
-          />
-          {errors?.password && (
-            <p className="text-red-500 text-xs italic">
-              {errors.password.message}
-            </p>
-          )}
-        </div>
-        <div className="justify-between">
-          <button
-            className="shadow-2xl text-gray-700 bg-gray-300 hover:bg-gray-400 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Se connecter
-          </button>
-        </div>
+        <Input
+          label="Adresse email"
+          register={register}
+          inputName="email"
+          validateMessage={errors?.email?.message}
+          onChange={e => handleInputChange(e)}
+          value={formData.email}
+        ></Input>
+        <Input
+          label="Mot de passe"
+          register={register}
+          inputName="password"
+          type="password"
+          validateMessage={errors?.password?.message}
+          onChange={e => handleInputChange(e)}
+          value={formData.password}
+        ></Input>
+        <Button buttonClass="btn-primary" label="Se connecter"></Button>
       </form>
     </div>
   )
