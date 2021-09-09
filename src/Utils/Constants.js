@@ -2,7 +2,7 @@ export const REGEX = {
   phone: /^\+\d{1}$/
 }
 
-export const SIDEBAR_MENU = [
+export const SIDEBAR_MENU_ADMIN = [
   {
     path: "/admin/mes-alertes",
     title: "Mes alertes"
@@ -18,10 +18,25 @@ export const SIDEBAR_MENU = [
   {
     path: "/admin/profil",
     title: "Profil"
+  }
+]
+
+export const SIDEBAR_MENU_USER = [
+  {
+    path: "/user/mes-alertes",
+    title: "Mes alertes"
   },
   {
-    path: "/user/base",
-    title: "Base"
+    path: "/user/mes-assets",
+    title: "Mes assets"
+  },
+  {
+    path: "/user/mes-contacts",
+    title: "Mes contacts"
+  },
+  {
+    path: "/user/profil",
+    title: "Profil"
   }
 ]
 

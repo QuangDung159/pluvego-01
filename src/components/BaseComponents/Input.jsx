@@ -2,34 +2,35 @@ import React from "react"
 
 export default function Input({ ...props }) {
   const {
-    containerClass,
+    containerClass = "mb-4",
     containerStyle = {},
-    labelTextClass,
+    labelTextClass = "input-label",
     labelTextStyle = {},
-    inputClass,
+    inputClass = "input",
     inputStyle = {},
     label,
     register = null,
     validateMessage,
     inputName,
-    validateMessageClass,
+    validateMessageClass = "validate-error-text",
     defaultValue,
     onChange,
     value,
-    type
+    type,
+    placeholder
   } = props
 
   return (
-    <div className={`mb-4 ${containerClass}`} style={containerStyle}>
+    <div className={containerClass} style={containerStyle}>
       <label
-        className={`input-label ${labelTextClass}`}
+        className={labelTextClass}
         style={labelTextStyle}
         htmlFor={`${inputName}`}
       >
         {label}
       </label>
       <input
-        className={`${validateMessage && "border-red-500"} input ${inputClass}`}
+        className={`${validateMessage && "border-red-500"} ${inputClass}`}
         style={inputStyle}
         name={inputName}
         type={type}
@@ -37,11 +38,10 @@ export default function Input({ ...props }) {
         defaultValue={defaultValue}
         onChange={input => onChange(input)}
         value={value || ""}
+        placeholder={placeholder}
       />
       {validateMessage && (
-        <p className={`validate-error-text ${validateMessageClass}`}>
-          {validateMessage}
-        </p>
+        <p className={validateMessageClass}>{validateMessage}</p>
       )}
     </div>
   )

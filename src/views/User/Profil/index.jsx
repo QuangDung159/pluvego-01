@@ -4,10 +4,10 @@ import { useForm } from "react-hook-form"
 import "react-phone-input-2/lib/style.css"
 import { useDispatch } from "react-redux"
 import * as yup from "yup"
-import Button from "../../components/BaseComponents/Button"
-import InlineInput from "../../components/BaseComponents/InlineInput"
-import InlinePhoneInput from "../../components/BaseComponents/InlinePhoneInput"
-import { setGlobalShowToast } from "../../redux/Actions"
+import Button from "../../../components/BaseComponents/Button"
+import InlineInput from "../../../components/BaseComponents/InlineInput"
+import InlinePhoneInput from "../../../components/BaseComponents/InlinePhoneInput"
+import { setGlobalShowToast } from "../../../redux/Actions"
 
 // create validation schema
 const schema = yup.object().shape({
@@ -45,7 +45,7 @@ export default function Profil() {
     nom: "nom",
     prenom: "prenom",
     fonction: "fonction",
-    email: "admin@admin.com",
+    email: "admin@mail.com",
     phoneNum: "3322312312"
   })
 
@@ -146,7 +146,7 @@ export default function Profil() {
 
   return (
     <div className="md:flex md:items-center mb-6 flex-col">
-      <p className="text-2xl pb-5">Profil</p>
+      <p className="text-2xl pb-5">Profil (user)</p>
       {renderForm()}
     </div>
   )

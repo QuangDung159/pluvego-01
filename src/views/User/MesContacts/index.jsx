@@ -10,7 +10,7 @@ export default function MesContacts() {
   // render
   return (
     <div className="md:flex md:items-center mb-6 flex-col">
-      <p className="text-2xl pb-5">Mes contacts</p>
+      <p className="text-2xl pb-5">Mes contacts (user)</p>
     </div>
   )
 }

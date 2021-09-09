@@ -1,11 +1,11 @@
 import { yupResolver } from "@hookform/resolvers/yup"
-import Input from "../../components/BaseComponents/Input"
+import Input from "../../../components/BaseComponents/Input"
 import React, { useState } from "react"
 import { useForm } from "react-hook-form"
 import * as yup from "yup"
-import Button from "../../components/BaseComponents/Button"
-import InlineInput from "../../components/BaseComponents/InlineInput"
-import InlinePhoneInput from "../../components/BaseComponents/InlinePhoneInput"
+import Button from "../../../components/BaseComponents/Button"
+import InlineInput from "../../../components/BaseComponents/InlineInput"
+import InlinePhoneInput from "../../../components/BaseComponents/InlinePhoneInput"
 
 // create validation schema
 const schema = yup.object().shape({
@@ -90,34 +90,6 @@ export default function Base() {
           }
           label="Numéro de téléphone"
         ></InlinePhoneInput>
-      </div>
-
-      <div className="mb-6 w-1/2 px-3">
-        <p className="text-bold text-xl pb-6">Input</p>
-        <Input
-          label="Name"
-          register={register}
-          inputName="name"
-          validateMessage={errors?.name?.message}
-          onChange={e => handleInputChange(e)}
-          value={formData.name}
-        ></Input>
-        <Input
-          label="Password"
-          register={register}
-          inputName="password"
-          type="password"
-          validateMessage={errors?.password?.message}
-          onChange={e => handleInputChange(e)}
-          value={formData.password}
-        ></Input>
-        <Input
-          label="Invalid field"
-          register={register}
-          validateMessage="Invalid field"
-          onChange={e => handleInputChange(e)}
-          value={formData.email}
-        ></Input>
       </div>
 
       <div className="mb-6 w-1/2 px-3 flex-row">

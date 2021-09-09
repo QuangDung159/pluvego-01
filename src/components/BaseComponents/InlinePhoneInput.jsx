@@ -3,31 +3,28 @@ import PhoneInput from "react-phone-input-2"
 
 export default function InlinePhoneInput({ ...props }) {
   const {
-    containerClass,
+    containerClass = "inline-input-container",
     containerStyle,
-    labelTextClass,
+    labelTextClass = "input-label",
     labelTextStyle,
     value,
     onChange,
     inputStyle = {
       width: "100%"
     },
-    inputClass,
+    inputClass = "phone-inline-input-container input-border-red",
     validateMessage,
-    validateMessageClass,
+    validateMessageClass = "validate-error-text",
     label,
     country = "fr"
   } = props
 
   return (
-    <div
-      className={`inline-input-container ${containerClass}`}
-      style={containerStyle}
-    >
+    <div className={containerClass} style={containerStyle}>
       {label && (
         <div className="md:w-2/5">
           <label
-            className={`input-label ${labelTextClass}`}
+            className={labelTextClass}
             style={labelTextStyle}
             htmlFor="phone"
           >
@@ -38,9 +35,7 @@ export default function InlinePhoneInput({ ...props }) {
 
       <div className={`${label && "md:w-3/5"}`}>
         <PhoneInput
-          inputClass={`phone-inline-input-container input-border-red ${inputClass} ${
-            validateMessage && "input-border-red"
-          }`}
+          inputClass={`${inputClass} ${validateMessage && "input-border-red"}`}
           country={country}
           value={value || ""}
           onChange={phone => {
@@ -49,9 +44,7 @@ export default function InlinePhoneInput({ ...props }) {
           inputStyle={inputStyle}
         />
         {validateMessage && (
-          <p className={`validate-error-text ${validateMessageClass}`}>
-            {validateMessage}
-          </p>
+          <p className={validateMessageClass}>{validateMessage}</p>
         )}
       </div>
     </div>

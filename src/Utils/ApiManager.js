@@ -13,14 +13,14 @@ export const getCurrentUserAsync = async () => {
   return await getWithToken(ENDPOINT.USER.GET_CURRENT_USER)
 }
 
-export const checkProtectedRouteAsync = async body => {
+export const checkValidTokenAsync = async body => {
   return await postWithToken(
     ENDPOINT.AUTHENTICATION.CHECK_PROTECTED_ROUTE,
     body
   )
 }
 
-export const checkProtectedRouteFailAsync = async body => {
+export const checkPrivateRouteFailAsync = async body => {
   return await postWithToken(
     ENDPOINT.AUTHENTICATION.CHECK_PROTECTED_ROUTE_FAIL,
     body

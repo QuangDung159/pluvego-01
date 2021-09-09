@@ -8,11 +8,12 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
-    "autoprefixer": "^9",
     "axios": "^0.21.3",
+    "core-js": "^3.6.5",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "postcss": "^7",
+    "express": "^4.17.1",
+    "prettier": "^2.3.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.14.2",
@@ -22,12 +23,13 @@
     "react-scripts": "4.0.3",
     "redux": "^4.1.1",
     "redux-logger": "^3.0.6",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "serve-static": "^1.14.1",
     "web-vitals": "^1.0.1",
     "yup": "^0.32.9"
   },
   "scripts": {
-    "start": "craco start",
+    "dev": "craco start",
+    "start": "node server.js",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
@@ -51,6 +53,8 @@
     ]
   },
   "devDependencies": {
-    "prettier": "^2.3.2"
+    "autoprefixer": "^9.8.6",
+    "postcss": "^7.0.36",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.14"
   }
 }

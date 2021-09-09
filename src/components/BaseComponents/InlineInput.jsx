@@ -2,17 +2,17 @@ import React from "react"
 
 export default function InlineInput({ ...props }) {
   const {
-    containerClass,
+    containerClass = "inline-input-container",
     containerStyle = {},
-    labelTextClass,
+    labelTextClass = "input-label",
     labelTextStyle = {},
-    inputClass,
+    inputClass = "inline-input",
     inputStyle = {},
     label,
     register = null,
     validateMessage,
     inputName,
-    validateMessageClass,
+    validateMessageClass = "validate-error-text",
     defaultValue,
     onChange,
     value,
@@ -20,16 +20,10 @@ export default function InlineInput({ ...props }) {
   } = props
 
   return (
-    <div
-      className={`inline-input-container ${containerClass}`}
-      style={containerStyle}
-    >
+    <div className={containerClass} style={containerStyle}>
       {label && (
         <div className="md:w-2/5">
-          <label
-            className={`input-label ${labelTextClass}`}
-            style={labelTextStyle}
-          >
+          <label className={labelTextClass} style={labelTextStyle}>
             {label}
           </label>
         </div>
@@ -40,7 +34,7 @@ export default function InlineInput({ ...props }) {
           <>
             <input
               type={type}
-              className={`inline-input ${inputClass} ${
+              className={`${inputClass} ${
                 validateMessage && "input-border-red"
               }`}
               style={inputStyle}
@@ -50,9 +44,7 @@ export default function InlineInput({ ...props }) {
               value={value || ""}
             />
             {validateMessage && (
-              <p className={`validate-error-text ${validateMessageClass}`}>
-                {validateMessage}
-              </p>
+              <p className={validateMessageClass}>{validateMessage}</p>
             )}
           </>
         ) : (

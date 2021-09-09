@@ -1,8 +1,15 @@
 import React, { useState } from "react"
 import { NavLink } from "react-router-dom"
-import { SIDEBAR_MENU } from "../Utils/Constants"
 
-export default function CustomSidebar() {
+export default function CustomSidebar({
+  menuArray,
+  navLink = "block py-2.5 px-4 transition duration-200 hover:bg-white header-nav-text text-gray-100",
+  mobileMenuBarContainer = "header-nav flex justify-between text-gray-100 md:hidden",
+  menuButton = "mobile-menu-button p-4 focus:outline-none focus:bg-gray-700",
+  mobileLogoContainer = "flex flex-wrap content-center pr-4 h-auto w-24",
+  logoUrl = "/assets/dist/images/logo-user.png",
+  sideBarContainer = "sidebar header-nav w-64 absolute inset-y-0 left-0 transform md:relative md:translate-x-0 transition duration-200 ease-in-out z-10"
+}) {
   // function
   const handleLogout = () => {
     localStorage.removeItem("token")
@@ -10,12 +17,8 @@ export default function CustomSidebar() {
 
   // render
   const renderMenu = () => {
-    return SIDEBAR_MENU.map(menuItem => (
-      <NavLink
-        className="block py-2.5 px-4 transition duration-200 hover:bg-gray-200"
-        key={menuItem.path}
-        to={menuItem.path}
-      >
+    return menuArray.map(menuItem => (
+      <NavLink className={navLink} key={menuItem.path} to={menuItem.path}>
         {menuItem.title}
       </NavLink>
     ))
@@ -25,10 +28,7 @@ export default function CustomSidebar() {
 
   const renderBtnShowMenu = () => {
     return (
-      <button
-        className="mobile-menu-button p-4 focus:outline-none focus:bg-gray-700"
-        onClick={() => setShowMenu(!showMenu)}
-      >
+      <button className={menuButton} onClick={() => setShowMenu(!showMenu)}>
         <svg
           className="h-5 w-5"
           xmlns="http://www.w3.org/2000/svg"
@@ -49,13 +49,8 @@ export default function CustomSidebar() {
 
   const renderLogo = () => {
     return (
-      <div className="flex flex-wrap content-center pr-4">
-        <div className="h-auto w-24 bg-black">
-          <img
-            src={process.env.PUBLIC_URL + "/assets/dist/images/logo.png"}
-            alt="logo"
-          />
-        </div>
+      <div className={mobileLogoContainer}>
+        <img src={`${process.env.PUBLIC_URL}${logoUrl}`} alt="logo" />
       </div>
     )
   }
@@ -63,17 +58,15 @@ export default function CustomSidebar() {
   return (
     <>
       {/* mobile menu bar */}
-      <div className="bg-gray-100 flex justify-between text-gray-700 md:hidden">
+      <div className={mobileMenuBarContainer}>
         {renderBtnShowMenu()}
         {renderLogo()}
       </div>
       {/* sidebar */}
       <div
-        className={`sidebar bg-gray-100 text-gray-700 w-64 absolute inset-y-0 left-0 transform ${
-          !showMenu && "-translate-x-full"
-        }  md:relative md:translate-x-0 transition duration-200 ease-in-out z-10`}
+        className={`${sideBarContainer} ${!showMenu && "-translate-x-full"}`}
       >
-        <div className=" px-4 flex justify-between md:hidden">
+        <div className="px-4 flex justify-between md:hidden">
           {renderLogo()}
           {renderBtnShowMenu()}
         </div>
@@ -81,7 +74,7 @@ export default function CustomSidebar() {
         <nav>
           {renderMenu()}
           <NavLink
-            className="block py-2.5 px-4 transition duration-200 hover:bg-gray-200 md:hidden"
+            className={`${navLink} md:hidden`}
             exact
             to="/"
             onClick={() => handleLogout()}

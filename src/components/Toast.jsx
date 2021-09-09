@@ -24,17 +24,15 @@ export default function Toast() {
     <>
       {globalShowToast && (
         <div
-          className={`alert alert-${globalToastProps?.type} alert-dismissible fade show custom-toast`}
-          role="alert"
+          className={`flex items-center border-l-4 py-2 px-3 shadow-md absolute top-0 right-0 m-2 z-10 max-w-sm ${
+            globalToastProps?.type === "error"
+              ? "bg-red-500 border-red-700"
+              : "bg-green-500 border-green-700"
+          }`}
         >
-          {globalToastProps?.content}
-          <button
-            type="button"
-            className="btn-close"
-            data-bs-dismiss="alert"
-            aria-label="Close"
-            onClick={() => dispatch(setGlobalShowToast(false))}
-          />
+          <div className="text-white max-w-xs ">
+            {globalToastProps?.content || "Toast content"}
+          </div>
         </div>
       )}
     </>
